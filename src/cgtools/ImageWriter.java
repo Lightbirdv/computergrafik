@@ -54,9 +54,10 @@ public class ImageWriter {
         raster.setPixel(x, y, rgb);
       }
     }
-    File outputfile = File.createTempFile("image-", ".png");
-    ImageIO.write(image, "png", outputfile);
-    Files.move(Paths.get(outputfile.getAbsolutePath()), Paths.get(filename), REPLACE_EXISTING);
+    //File outputfile = File.createTempFile("image-", ".png");
+    //ImageIO.write(image, "png", outputfile);
+    //Files.move(Paths.get(outputfile.getAbsolutePath()), Paths.get("D:/Uni/Computergrafik/cgg-abgaben/src/cgg/a01/" + filename), REPLACE_EXISTING);
+    ImageIO.write(image, "png", new File(filename));
   }
 
   private static double clamp(double v) {

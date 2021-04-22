@@ -3,16 +3,28 @@ package cgg;
 import cgtools.*;
 
 public class Image {
+
+  int imageWidth;
+  int imageHeight;
+  int imageX;
+  int imageY;
+  double[] imageData;
+
   public Image(int width, int height) {
-    notYetImplemented();
+    this.imageWidth = width;
+    this.imageHeight = height;
+    this.imageData = new double[(width * height * 3)];
   }
 
   public void setPixel(int x, int y, Color color) {
-    notYetImplemented();
+    int saveIndex= (3 * (y * imageWidth + x));
+    imageData[saveIndex + 0] = color.r;
+    imageData[saveIndex + 1] = color.g;
+    imageData[saveIndex + 2] = color.b;
   }
 
   public void write(String filename) {
-    notYetImplemented();
+    ImageWriter.write(filename, imageData, imageWidth, imageHeight);
   }
 
   public void sample(Sampler s) {
