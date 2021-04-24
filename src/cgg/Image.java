@@ -1,6 +1,7 @@
 package cgg;
 
 import cgtools.*;
+import cgtools.Color;
 
 public class Image {
 
@@ -9,6 +10,7 @@ public class Image {
   int imageX;
   int imageY;
   double[] imageData;
+  Color average;
 
   public Image(int width, int height) {
     this.imageWidth = width;
@@ -23,16 +25,52 @@ public class Image {
     imageData[saveIndex + 2] = color.b;
   }
 
+  public void setPixelGamma(int x, int y, Color color) {
+    int saveIndex= (3 * (y * imageWidth + x));
+    imageData[saveIndex + 0] = Math.pow(color.r, 1/2.2);
+    imageData[saveIndex + 1] = Math.pow(color.g, 1/2.2);
+    imageData[saveIndex + 2] = Math.pow(color.b, 1/2.2);
+  }
+
   public void write(String filename) {
     ImageWriter.write(filename, imageData, imageWidth, imageHeight);
   }
 
   public void sample(Sampler s) {
-    notYetImplemented();
+    for (int x = 0; x != imageWidth; x++) {
+      for (int y = 0; y != imageHeight; y++) {
+        // Sets the color for one particular pixel.
+        setPixel(x, y, s.getColor(x, y));
+      }
+    }
   }
 
-  private void notYetImplemented() {
-    System.err.println("Please complete the implementation of class cgg.Image as part of assignment 1.");
-    System.exit(1);
+  public void samplegamma(Sampler s) {
+    for (int x = 0; x != imageWidth; x++) {
+      for (int y = 0; y != imageHeight; y++) {
+        // Sets the color for one particular pixel.
+        setPixelGamma(x, y,  s.getColor(x, y));
+      }
+    }
+  }
+
+  public void supersample(Sampler s, int n) {
+    for (int x = 0; x != imageWidth - 1; x++) {
+      for (int y = 0; y != imageHeight - 1; y++) {
+        Color average = s.getColor(x, y);
+        // Sets the color for one particular pixel.
+        //setPixel(x, y, CD.getColor(x, y));
+        for (int xi = 0; xi < n; xi++) {
+          for (int yi = 0; yi < n; yi++) {
+            double rx = Random.random();
+            double ry = Random.random();
+            double xs = x + (xi + rx) / n;
+            double ys = y + (yi + ry) / n;
+            average = Color.add(average,s.getColor(xs, ys));
+          }
+        }
+        setPixelGamma(x, y, Color.divide(average, n*n));
+      }
+    }
   }
 }
