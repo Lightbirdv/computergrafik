@@ -10,13 +10,13 @@ public class Main {
         final int width = 1600;
         final int height = 900;
         
-        Sphere sphere1 = new Sphere(point(-200,0,550),80);
-        Sphere sphere2 = new Sphere(point(0,0,550),80);        
-        Sphere sphere3 = new Sphere(point(200,0,550),80);
+        Sphere sphere1 = new Sphere(point(-200,0,-500),80);
+        Sphere sphere2 = new Sphere(point(0,0,-500),80);        
+        Sphere sphere3 = new Sphere(point(200,0,-500),80);
         
         Image image = new Image(width, height);
         ArrayList<Sphere> spheres = new ArrayList<>(Arrays.asList(sphere1,sphere2,sphere3));
-        Camera cam = new Camera(200, width, height);
+        Camera cam = new Camera(Math.PI/2, width, height);
 
         Raytracing raytraycing = new Raytracing(spheres, cam);
 
