@@ -13,7 +13,7 @@ public class Camera {
         this.height = height;
     }
 
-    public Direction CalcPoint(int xp, int yp) {
+    public Direction CalcPoint(double xp, double yp) {
         double x = xp - this.width/2;
         double y = -(yp - this.height/2);
         double z = -((this.width/2)/(Math.tan(this.camanglephi/2)));

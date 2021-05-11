@@ -14,7 +14,7 @@ public class Raytracing implements Sampler{
     }
 
     public Color getColor(double x, double y) {
-        Direction d = camera.CalcPoint((int) x,(int) y);
+        Direction d = camera.CalcPoint( x, y);
         Ray ray = new Ray(point(0, 0, 0), d, 0, Double.POSITIVE_INFINITY);
         Hit returnHit = group.intersect(ray);
         return shade(returnHit.normaleN, returnHit.c);
