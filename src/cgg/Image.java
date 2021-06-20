@@ -55,22 +55,47 @@ public class Image {
   }
 
   public void supersample(Sampler s, int n) {
-    for (int x = 0; x != imageWidth - 1; x++) {
-      for (int y = 0; y != imageHeight - 1; y++) {
-        Color average = s.getColor(x, y);
-        // Sets the color for one particular pixel.
-        //setPixel(x, y, CD.getColor(x, y));
-        for (int xi = 0; xi < n; xi++) {
-          for (int yi = 0; yi < n; yi++) {
-            double rx = Random.random();
-            double ry = Random.random();
-            double xs = x + (xi + rx) / n;
-            double ys = y + (yi + ry) / n;
-            average = Color.add(average,s.getColor(xs, ys));
+    int cores = Runtime.getRuntime().availableProcessors();
+    System.out.println(cores);
+    Thread[] threads = new Thread[cores];
+    double start = System.currentTimeMillis();
+    for (int i=0; i != cores; i++) {
+      final int core = i;
+      threads[i] = new Thread() {
+        public void run() {
+          for (int x = (imageWidth/cores) * core; x != (imageWidth/cores) * core + (imageWidth/cores); x++) {
+            for (int y = 0; y != imageHeight; y++) {
+              Color average = s.getColor(x, y);
+              // Sets the color for one particular pixel.
+              //setPixel(x, y, CD.getColor(x, y));
+              for (int xi = 0; xi < n; xi++) {
+                for (int yi = 0; yi < n; yi++) {
+                  double rx = Random.random();
+                  double ry = Random.random();
+                  double xs = x + (xi + rx) / n;
+                  double ys = y + (yi + ry) / n;
+                  average = Color.add(average,s.getColor(xs, ys));
+                }
+              }
+              setPixelGamma(x, y, Color.divide(average, n*n));
+            }
           }
         }
-        setPixelGamma(x, y, Color.divide(average, n*n));
+      };
+      threads[i].start();
+    } 
+  
+    for (int iz=0; iz!= cores;iz++) {
+      try {
+        threads[iz].join();
+      } catch (InterruptedException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
       }
+
     }
+    double end = System.currentTimeMillis() - start;
+    System.out.println(end);
   }
+
 }
