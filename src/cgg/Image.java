@@ -52,6 +52,7 @@ public class Image {
         setPixelGamma(x, y,  s.getColor(x, y));
       }
     }
+    
   }
 
   public void supersample(Sampler s, int n) {

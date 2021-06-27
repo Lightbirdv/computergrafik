@@ -18,7 +18,7 @@ public class Main {
         Shape globe3 = new Sphere(point(1.0, 0.25, -2.5), 0.7, blue, new DiffuseMaterial(blue));
         Shape globe4 = new Sphere(point(1.2, 0.25, -1.5), 0.3, orange, new DiffuseMaterial(orange));
         Shape globe5 = new Sphere(point(1.0, 1, -2.5), 0.2, cyan, new DiffuseMaterial(cyan));
-        Shape globe6 = new Sphere(point(-1.0, 1.1, -2.5), 0.3, yellow, new DiffuseMaterial(yellow));
+        // Shape globe6 = new Sphere(point(-1.0, 1.1, -2.5), 0.3, yellow, new DiffuseMaterial(yellow));
         shapes.add(background);
         shapes.add(ground);
         shapes.add(globe1);

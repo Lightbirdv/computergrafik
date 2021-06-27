@@ -99,7 +99,7 @@ public class Main {
         Shape star24 = new Sphere(point(-56, 65, -100), 0.8, red, new BackgroundMaterial(new Color(1,0.93,0.87)));
         Shape star25 = new Sphere(point(-67, 75, -100), 1.2, red, new BackgroundMaterial(new Color(1,0.93,0.87)));
         Shape star26 = new Sphere(point(-88, 38, -100), 0.6, red, new BackgroundMaterial(new Color(1,0.93,0.87)));
-        Shape star27 = new Sphere(point(-100, 56, -100), 0.5, red, new BackgroundMaterial(new Color(1,0.93,0.87)));
+        // Shape star27 = new Sphere(point(-100, 56, -100), 0.5, red, new BackgroundMaterial(new Color(1,0.93,0.87)));
         Shape star28 = new Sphere(point(25, 18, -100), 0.8, red, new BackgroundMaterial(new Color(1,0.93,0.87)));
         Shape star29 = new Sphere(point(35, 25, -100), 1.2, red, new BackgroundMaterial(new Color(1,0.93,0.87)));
         Shape star30 = new Sphere(point(40, 9, -100), 0.6, red, new BackgroundMaterial(new Color(1,0.93,0.87)));
